@@ -1,5 +1,6 @@
 package com.uchamod.user.Model;
 
+import com.uchamod.commonmodules.DTO.UserWrapper;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

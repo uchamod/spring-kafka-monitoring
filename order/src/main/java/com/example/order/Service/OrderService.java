@@ -1,12 +1,14 @@
 package com.example.order.Service;
 import com.example.order.DTO.*;
 import com.example.order.Feign.OrderFeignClient;
-import com.example.order.Feign.UserFeignClient;
-import com.example.order.Helper.Helper;
+
 import com.example.order.Model.Order;
 import com.example.order.Model.OrderProductModel;
 import com.example.order.Repostory.OrderRepo;
 import com.example.order.Service.Kproducer.MailProducerEvent;
+
+import com.uchamod.commonmodules.Models.Cart;
+import com.uchamod.commonmodules.Models.CartProduct;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +25,9 @@ public class OrderService {
 
     private final OrderRepo orderRepo;
     private final OrderFeignClient orderFeignClient;
-    private final EmailService emailService;
-    private final UserFeignClient userFeignClient;
-    private final Helper helper;
+
     private final MailProducerEvent mailProducerEvent;
-    StringBuilder body = new StringBuilder();
+
     //place new order
     public ResponseEntity<Order> placeOrder(UUID uuid) {
         try{
@@ -55,19 +55,7 @@ public class OrderService {
              //send acknowledgement mail to seller
             //use kafka
             mailProducerEvent.sendInventoryEvent(order);
-
-
-//           List<EmailDTO> emailDTOList= helper.createEmailDTO(orderProductModelList);
-//            ResponseEntity<UserWrapper> customerDTO= userFeignClient.getUserDTO(uuid);
-//          for(EmailDTO emailDTO : emailDTOList){
-//              ResponseEntity<UserWrapper> sellerDTO= userFeignClient.getUserDTO(emailDTO.getSellerId());
-//
-//              emailService.sendOrderNotificationToSeller(sellerDTO.getBody(),order,customerDTO.getBody(),emailDTO,body,"New Order Received - Order #");
-//             // emailService.sendSimpleEmail(userDTO.getBody().getUserEmail(),subject,"email is recive succsussfuly");
-//          }
-
-
-          return ResponseEntity.ok(order);
+            return ResponseEntity.ok(order);
         }catch (Exception e){
             System.out.println("error while creating order "+e.getMessage());
             return ResponseEntity.internalServerError().build();
@@ -138,15 +126,7 @@ public class OrderService {
                 System.out.println(result.getBody());
             }
             orderRepo.save(order.get());
-            List<OrderProductModel> orderProductModel= order.get().getOrderProductModelList();
-            List<EmailDTO> emailDTOList= helper.createEmailDTO(orderProductModel);
-            ResponseEntity<UserWrapper> customerDTO= userFeignClient.getUserDTO(order.get().getCustomerId());
-            for(EmailDTO emailDTO : emailDTOList){
-                ResponseEntity<UserWrapper> sellerDTO= userFeignClient.getUserDTO(emailDTO.getSellerId());
-                //String subject = "New Order Received - Order #" + order.get().getOrderId().toString().substring(0, 8);
                 mailProducerEvent.sendInventoryEvent(order.get());
-              //  emailService.sendOrderNotificationToSeller(sellerDTO.getBody(),order.get(),customerDTO.getBody(),emailDTO,body,"Payment Completed - Order #");
-            }
 
             return ResponseEntity.ok("status updated "+status);
         }catch (Exception e){

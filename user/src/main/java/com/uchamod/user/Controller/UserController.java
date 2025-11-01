@@ -1,6 +1,7 @@
 package com.uchamod.user.Controller;
 
-import com.uchamod.user.Model.UserWrapper;
+
+import com.uchamod.commonmodules.DTO.UserWrapper;
 import com.uchamod.user.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -37,15 +38,15 @@ public class UserController {
     public ResponseEntity<List<UserWrapper>> getAllUserByCategory(@PathVariable String userRole){
         return userServices.getAllCustomers(userRole);
     }
-   /* @GetMapping("/getAllSellers")
-    public ResponseEntity<List<UserWrapper>> getAllSellers(){
-        return userServices.getAllSellers();
-    }*/
+
    @GetMapping("/getUserModel/{userId}")
    ResponseEntity<UserWrapper> getUserDTO(@PathVariable UUID userId){
        return userServices.getUserById(userId);
    }
 
-
+    @DeleteMapping("/deleteuser/{userId}")
+    public ResponseEntity<String> deteteUser(@PathVariable UUID userId){
+        return userServices.deteteUser(userId);
+    }
 
 }

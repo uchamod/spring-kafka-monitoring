@@ -1,8 +1,9 @@
 package com.uchamod.user.Controller;
 
 
+import com.uchamod.commonmodules.DTO.UserWrapper;
 import com.uchamod.user.Model.UserAuthResponse;
-import com.uchamod.user.Model.UserWrapper;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

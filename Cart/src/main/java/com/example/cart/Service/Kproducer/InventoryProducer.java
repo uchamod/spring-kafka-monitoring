@@ -1,7 +1,8 @@
 package com.example.cart.Service.Kproducer;
 
 
-import com.example.cart.Model.ProductInventoryEvent;
+
+import com.uchamod.commonmodules.DTO.ProductInventoryEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -27,5 +28,3 @@ public class InventoryProducer {
 
     }
 }
-// Read all messages from 'inventory-updates'
-//docker exec -it kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic inventory-updates --from-beginning

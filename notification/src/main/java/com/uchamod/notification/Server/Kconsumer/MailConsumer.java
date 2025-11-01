@@ -1,10 +1,13 @@
 package com.uchamod.notification.Server.Kconsumer;
 
-import com.uchamod.notification.DTO.EmailDTO;
-import com.uchamod.notification.DTO.UserWrapper;
+
+import com.uchamod.commonmodules.DTO.EmailDTO;
+import com.uchamod.commonmodules.DTO.UserWrapper;
+import com.uchamod.commonmodules.Models.Order;
+
 import com.uchamod.notification.Feign.UserFeignClient;
 import com.uchamod.notification.Helper.Helper;
-import com.uchamod.notification.Model.Order;
+
 import com.uchamod.notification.Server.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -38,7 +41,7 @@ public class MailConsumer {
                 ResponseEntity<UserWrapper> sellerDTO= userFeignClient.getUserDTO(emailDTO.getSellerId());
 
                 emailService.sendOrderNotificationToSeller(sellerDTO.getBody(),event,customerDTO.getBody(),emailDTO,body,"New Order Received - Order #");
-                // emailService.sendSimpleEmail(userDTO.getBody().getUserEmail(),subject,"email is recive succsussfuly");
+
             }
             System.out.println("order create mail sent to seller");
         } catch (Exception e) {

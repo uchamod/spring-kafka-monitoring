@@ -1,12 +1,14 @@
 package com.uchamod.user.Service;
 
+import com.uchamod.commonmodules.DTO.UserWrapper;
 import com.uchamod.user.Model.User;
-import com.uchamod.user.Model.UserWrapper;
+
 import com.uchamod.user.Reposotory.UserRepo;
 import com.uchamod.user.Service.Kproducer.UserDeleteProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -106,6 +108,7 @@ public class UserService {
         }
     }
     //clear all user data
+    @Transactional
     public ResponseEntity<String> deteteUser(UUID userId) {
         try{
             if(userId == null){
@@ -128,39 +131,4 @@ public class UserService {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*//get all sellers
-    public ResponseEntity<List<UserWrapper>> getAllSellers() {
-        try{
-            List<User> users=userRepo.findAll();
-            List<UserWrapper> userWrappers=users.stream()
-                    .map(user -> new UserWrapper(
-                            user.getUserName(),
-                            user.getUserEmail(),
-                            user.getUserRole(),
-                            user.getUserStatus(),
-                            user.getUserPhone(),
-                            user.getUserAddress()
-                    )).collect(Collectors.toList());
-            return  ResponseEntity.ok(userWrappers);
-        }catch (Exception e){
-            System.out.println("faild to get all Sellers");
-            return ResponseEntity.internalServerError().build();
-        }
-    }*/
 }

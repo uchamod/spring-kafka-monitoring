@@ -1,8 +1,10 @@
 package com.uchamod.notification.Helper;
 
 
-import com.uchamod.notification.DTO.EmailDTO;
-import com.uchamod.notification.Model.OrderProductModel;
+
+import com.uchamod.commonmodules.DTO.EmailDTO;
+
+import com.uchamod.commonmodules.Models.OrderProductModel;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;

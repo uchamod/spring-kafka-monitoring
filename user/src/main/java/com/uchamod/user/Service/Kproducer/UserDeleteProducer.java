@@ -1,7 +1,8 @@
 package com.uchamod.user.Service.Kproducer;
 
 
-import com.uchamod.user.Model.UserDeleteEvent;
+import com.uchamod.commonmodules.Models.UserDeleteEvent;
+
 import org.springframework.kafka.core.KafkaTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,8 @@ public class UserDeleteProducer {
     private static final String INVENTORY_TOPIC = "user-delete-topic";
 
     public void sendUserDeleteEvent(UUID userId){
-        UserDeleteEvent userDeleteEvent=new UserDeleteEvent(userId);
+
+        UserDeleteEvent userDeleteEvent=new UserDeleteEvent();
         kafkaTemplate.send(INVENTORY_TOPIC,userId.toString(),userDeleteEvent).whenComplete(
                 (result, ex) -> {
                     if (ex == null) {

@@ -1,6 +1,7 @@
 package com.uchamod.estore.Service.Kconsumer;
 
-import com.uchamod.estore.Model.ProductInventoryEvent;
+
+import com.uchamod.commonmodules.DTO.ProductInventoryEvent;
 import com.uchamod.estore.Service.Product_Service;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
@@ -31,5 +32,3 @@ public class InventoryConsumer {
        }
     }
 }
-//to check current topics
-//docker exec -it  confluentinc/cp-kafka:7.8.3 kafka-topics --bootstrap-server localhost:9092 --list

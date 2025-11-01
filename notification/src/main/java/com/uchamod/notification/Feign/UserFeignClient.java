@@ -1,7 +1,8 @@
 package com.uchamod.notification.Feign;
 
 
-import com.uchamod.notification.DTO.UserWrapper;
+
+import com.uchamod.commonmodules.DTO.UserWrapper;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

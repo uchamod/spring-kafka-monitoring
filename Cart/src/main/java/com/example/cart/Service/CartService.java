@@ -1,12 +1,14 @@
 package com.example.cart.Service;
 
-import com.example.cart.DTO.CountUpdater;
-import com.example.cart.DTO.ProductData;
+
+
 import com.example.cart.Feign.Feign_Client;
 import com.example.cart.Model.*;
 import com.example.cart.Repo.CartRepo;
 import com.example.cart.Service.Kproducer.InventoryProducer;
 
+import com.uchamod.commonmodules.DTO.ProductData;
+import com.uchamod.commonmodules.DTO.ProductInventoryEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
@@ -42,7 +44,7 @@ public class CartService {
             //update product item count
             //use kafka
             inventoryProducer.sendInventoryEvent(productInventoryEvent);
-          //  feignClient.updateAvailableCount(new CountUpdater(productId,1,false));
+
             //for new cart
             if(existingCart == null){
                 List<CartProduct> cartProduct = new ArrayList<>(Arrays.asList(
@@ -94,7 +96,7 @@ public class CartService {
                     Integer finalCount=existingCount-count;
                     //use kafka
                     inventoryProducer.sendInventoryEvent(new ProductInventoryEvent(productId,Math.abs(finalCount),existingCount > count));
-                    // feignClient.updateAvailableCount(new CountUpdater(productId,Math.abs(finalCount),existingCount > count));
+
                     cartProduct.setProductCount(count);
                     cartRepo.save(cart);
                     return ResponseEntity.ok(cart.getCartProductList());
@@ -124,7 +126,7 @@ public class CartService {
             CartProduct cartProduct= cart.getCartProductList().remove(productId.compareTo(productId));
             //use kafka
             inventoryProducer.sendInventoryEvent(new ProductInventoryEvent(productId,cartProduct.getProductCount(),true));
-           // feignClient.updateAvailableCount(new CountUpdater(productId,cartProduct.getProductCount(),true));
+
               cart.setTotalAmount(cart.getTotalAmount()-(total.getBody().getProductPrice()*cartProduct.getProductCount()));
             cartRepo.save(cart);
 
@@ -194,11 +196,11 @@ public class CartService {
     @Transactional
     public ResponseEntity<String> checkoutFromCart(UUID userId) {
         try{
-            if(userId==null){
+            if(userId == null){
                 return ResponseEntity.badRequest().build();
             }
                Cart cart= cartRepo.deleteByCustomerId(userId);
-            if(cart.getCartProductList().isEmpty()){
+            if(cart.getCartProductList() == null || cart.getCartProductList().isEmpty()){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("user product list is empty");
             }
             return ResponseEntity.status(HttpStatus.OK).body("user product list is removed succsussfuly");
@@ -210,7 +212,7 @@ public class CartService {
     //get cart by userid
     public ResponseEntity<Cart> getCartByUserId(UUID userId){
         try{
-            if(userId==null){
+            if(userId == null){
                 return ResponseEntity.badRequest().build();
             }
             Cart userCart=cartRepo.findCartByCustomerId(userId);

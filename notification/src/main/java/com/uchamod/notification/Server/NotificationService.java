@@ -1,11 +1,15 @@
 package com.uchamod.notification.Server;
 
 
-import com.uchamod.notification.DTO.EmailDTO;
-import com.uchamod.notification.DTO.UserWrapper;
-import com.uchamod.notification.Model.Order;
+
+import com.uchamod.commonmodules.DTO.EmailDTO;
+import com.uchamod.commonmodules.DTO.UserWrapper;
+import com.uchamod.commonmodules.Models.Order;
+import com.uchamod.commonmodules.Models.OrderProductModel;
+
+
 import com.uchamod.notification.Model.User;
-import com.uchamod.notification.Model.OrderProductModel;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,7 +29,7 @@ import java.text.SimpleDateFormat;
 public class NotificationService {
 
     private final JavaMailSender javaMailSender;
-    // private final TemplateEngine templateEngine;
+
 
     @Value("${app.email.from}")
     private String fromEmail;
@@ -51,9 +55,7 @@ public class NotificationService {
     public void sendOrderNotificationToSeller(UserWrapper seller, Order order, UserWrapper customer,
                                               EmailDTO emailDTO, StringBuilder body, String subjectPrefix) {
         try {
-            // String subject = "New Order Received - Order #" + order.getOrderId().toString().substring(0, 8);
 
-            // StringBuilder body = new StringBuilder();
             body.setLength(0);
             body.append("Dear ").append(seller.getUserName()).append(",\n\n");
             body.append("You have received a new order!\n\n");

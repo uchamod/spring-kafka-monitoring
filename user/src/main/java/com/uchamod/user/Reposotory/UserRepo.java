@@ -2,7 +2,7 @@ package com.uchamod.user.Reposotory;
 
 import com.uchamod.user.Model.User;
 
-import com.uchamod.user.Model.UserWrapper;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

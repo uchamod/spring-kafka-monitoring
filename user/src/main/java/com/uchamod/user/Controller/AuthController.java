@@ -35,10 +35,7 @@ public class AuthController {
     public ResponseEntity<UserAuthResponse> login(@RequestBody UserLoginCredientials userLoginCredientials){
         return userServices.login(userLoginCredientials);
     }
-    @DeleteMapping("/deleteuser/{userId}")
-    public ResponseEntity<String> deteteUser(@PathVariable UUID userId){
-        return userService.deteteUser(userId);
-    }
+
 }
 
 

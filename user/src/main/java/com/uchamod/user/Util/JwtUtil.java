@@ -64,10 +64,7 @@ public class JwtUtil {
         return extractExpireTime(token).before(new Date());
     }
    //check validation
-   /* public Boolean validateToken(String token, UserDetails userDetails){
-        final String email=extractEmail(token);
-        return (email.equals(userDetails.getUsername()) && !isTokenExpired(token));
-    }*/
+
     private <T> T extractClaim(String token, Function<Claims,T> claimsResolver) {
         final Claims claims=extractAllClaims(token);
         return claimsResolver.apply(claims);

@@ -2,9 +2,10 @@ package com.uchamod.user.Service;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.uchamod.commonmodules.DTO.UserWrapper;
 import com.uchamod.user.Model.User;
 import com.uchamod.user.Model.UserAuthResponse;
-import com.uchamod.user.Model.UserWrapper;
+
 import com.uchamod.user.Reposotory.UserRepo;
 import com.uchamod.user.Util.JwtUtil;
 import jakarta.servlet.ServletException;
@@ -70,10 +71,7 @@ public class CustomOAuthService implements AuthenticationSuccessHandler {
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().write(objectMapper.writeValueAsString(authResponse));
             response.getWriter().flush();
-           /* response.sendRedirect("/api/oauth/google?token=" + token+
-                    "&email=" + URLEncoder.encode(user.getUserEmail(), StandardCharsets.UTF_8) +
-                    "&name=" + URLEncoder.encode(user.getUserName(), StandardCharsets.UTF_8) +
-                    "&role=" + user.getUserRole());*/
+
 
 
         } catch (Exception e){

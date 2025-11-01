@@ -1,8 +1,10 @@
 package com.example.cart.Feign;
 
-import com.example.cart.DTO.CountUpdater;
-import com.example.cart.DTO.ProductData;
+
+
 import com.example.cart.Model.ProductWrapper;
+import com.uchamod.commonmodules.DTO.CountUpdater;
+import com.uchamod.commonmodules.DTO.ProductData;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

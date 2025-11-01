@@ -1,10 +1,11 @@
 package com.uchamod.user.Service;
 
 
+import com.uchamod.commonmodules.DTO.UserWrapper;
 import com.uchamod.user.Model.User;
 import com.uchamod.user.Model.UserAuthResponse;
 import com.uchamod.user.Model.UserLoginCredientials;
-import com.uchamod.user.Model.UserWrapper;
+
 import com.uchamod.user.Reposotory.UserRepo;
 import com.uchamod.user.Service.Kproducer.UserRegisterMailEvent;
 import com.uchamod.user.Util.JwtUtil;

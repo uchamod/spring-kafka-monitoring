@@ -1,7 +1,8 @@
 package com.uchamod.estore.Service.Kconsumer;
 
 
-import com.uchamod.estore.Model.UserDeleteEvent;
+
+import com.uchamod.commonmodules.Models.UserDeleteEvent;
 import com.uchamod.estore.Service.Product_Service;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

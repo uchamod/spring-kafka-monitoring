@@ -1,10 +1,12 @@
 package com.uchamod.estore.Service;
 
 
-import com.uchamod.estore.DTO.ProductData;
-import com.uchamod.estore.Model.CountUpdater;
+import com.uchamod.commonmodules.DTO.ProductData;
+import com.uchamod.commonmodules.DTO.ProductInventoryEvent;
+
+
 import com.uchamod.estore.Model.Product;
-import com.uchamod.estore.Model.ProductInventoryEvent;
+
 import com.uchamod.estore.Repo.Product_Repo;
 
 import lombok.RequiredArgsConstructor;

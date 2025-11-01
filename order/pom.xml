@@ -93,6 +93,11 @@
             <artifactId>micrometer-registry-prometheus</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>com.uchamod</groupId>
+            <artifactId>common-modules</artifactId>
+            <version>0.0.2</version>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
